@@ -1,0 +1,79 @@
+1. 版本查询修改为包管理应用的版本，而不是py文件的版本
+
+2. 命令优化：
+    2.1 add
+        功能修改为添加组件（即子仓库，后续均称为组件）
+        
+    2.2 checkout
+        删除
+        
+    2.3 clean
+        删除
+        
+    2.4 clone
+        修改为import，参数可以是应用名称，亦可是URL；能够自动导入应用仓库，并自动拉取依赖的组件、将组件切换至依赖关系指定的代码状态
+
+    2.5 commit
+        修改为publish，可以自动添加文件、添加提交日志，并自动提交和上传至服务器
+        
+        默认提交应用仓库；
+        可指定组件名或组件的本地相对路径，提交组件代码
+        可通过 --all 或 -A 来递归提交从底层组件至上层应用的所有代码
+        (
+        
+    2.6 config
+        删除
+        
+    2.7 get/getversion/git
+        统一修改为info，返回当前仓库的分支名、别名:远端URL 等信息
+        
+    2.8 init
+        修改为new，创建一个空的git仓库
+        
+    2.9 log
+        删除
+        
+    2.10 ls
+        递归列举出从应用包至各组件的依赖树，并显示对应的 URL#commit-id
+        
+    2.11 push
+        删除
+        
+    2.12 reflog
+        删除
+    
+    2.13 remove
+        移除组件，包括删除代码和移除依赖关系
+        
+    2.14 status
+        递归列举出从应用包至各组件的代码变更状态
+        
+    2.15 switch
+        删除
+        
+    2.16 update
+        可根据分支名、标签名、版本号切换代码，亦可拉取最新代码
+        
+        应用层代码变更后，要自动将组件切换至依赖关系指定的代码状态
+
+3. 补充命令：
+    3.1 sync
+        同步应用对组件的依赖关系
+        
+        按下面的样式列出所有状态发生变化的组件，如果检测到有未提交的组件，给出提示，由用户确认是否继续同步依赖关系：
+        
+        Components those are modified:
+            <component_name> (uncommitted): <commit-id>
+            <component_name> (new commits): <commit-id>, 7 versions behind the latest version
+            
+        Some modified components are not committed, only committed ones can be synchronised, continue(Y/n)?
+        All modified components are committed, synchronising ...
+        
+        最后两行根据组件状态二选一
+        
+    3.2 deploy
+        补全丢失的组件
+		云端同步仓库的依赖关系 有缺失的子仓库会补全
+        
+    3.3 releases
+        查看发布的标签
