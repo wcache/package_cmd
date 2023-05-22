@@ -44,7 +44,7 @@ def get_remote_repos():
 
 @click.group()
 @click.version_option(version=__VERSION__)
-def cli(ctx):
+def cli():
     """package tool for QuecPython"""
     pass
 
